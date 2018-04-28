@@ -24,6 +24,17 @@ Create an embedded device that is:
 * HC-SR501 PIR motion sensor
 * Knightbright KPS-3227SP1C ambient light photo sensor
 
+## STM32 pinout
+
+| Pin function | STM32 Pin | Connected to           |
+|--------------------------|------------------------|
+| USART1 RX    | PA10      | ESP-01 TXD             |
+| USART1 TX    | PA9       | ESP-01 RXD             |
+| BOOT0 (=1)   | -         | ESP-01 GPIO2           |
+| BOOT1 (=0)   | -         | _GND_                  |
+| NRST         | -         | ESP-01 GPIO0           |
+
+
 ## Features
 
 ### Remote firmware upgrade
@@ -31,14 +42,6 @@ Create an embedded device that is:
 #### STM32F1
 
 The embedded bootloader (DFU) can be used. USART1, BOOT0 and NRST must be connected to the ESP module. Bootloader is activated by "Pattern 1".
-
-| Pin function (for STM32) | STM32 Pin | ESP-01 Pin           |
-|--------------------------|-----------|----------------------|
-| USART1 RX                | PA10      | TXD                  |
-| USART1 TX                | PA9       | RXD                  |
-| BOOT0 (=1)               | -         | controlled via GPIO2 |
-| BOOT1 (=0)               | -         | _GND_                |
-| NRST                     | -         | GPIO0                |
 
 BOOT0 must not be pulled high by default, NRST pull-up is O.K.
 Series resistors should be included between STM and ESP pins.
