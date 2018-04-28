@@ -27,7 +27,7 @@ Create an embedded device that is:
 ## STM32 pinout
 
 | Pin function | STM32 Pin | Connected to           |
-|--------------------------|------------------------|
+|--------------|-----------|------------------------|
 | USART1 RX    | PA10      | ESP-01 TXD             |
 | USART1 TX    | PA9       | ESP-01 RXD             |
 | BOOT0 (=1)   | -         | ESP-01 GPIO2           |
