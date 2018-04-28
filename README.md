@@ -33,7 +33,8 @@ Create an embedded device that is:
 | BOOT0 (=1)   | -         | ESP-01 GPIO2           |
 | BOOT1 (=0)   | -         | _GND_                  |
 | NRST         | -         | ESP-01 GPIO0           |
-
+| I2C1 SDA     | PB7       | HTU21D SDA             |
+| I2C1 SCL     | PB6       | HTU21D SCL             |
 
 ## Features
 
@@ -82,3 +83,11 @@ The STM32's ADC can be configured in many ways. The input impedance depends on s
 Connect C to 3.3 V power supply, connect E to a series resistor that is connected to GND. The voltage measured on E will be a function of R value and illuminance.
 
 The resistor value should be above 165 Ohm (allows 20 mA at 3.3 V) and under 3.3 kOhm (allows 1 mA ~ 1000 lx). `3.3 k << 50 k` (input impedance can be ignored).
+
+### Temperature and Humidity measurement
+
+The HTU21D sensor is attached to the I2C1 peripheral of the MCU. The sensor's 7-bit address is `0x40` (`0x80` with the R/W bit). After powering up the device, a soft reset is recommended (`0xFE`).
+
+The sensor can be used in _hold master_ and _no hold master_ modes. The hold master mode means that the SCL line is blocked while measuring (clock stretch). This can be used in this application since there are no other devices on the bus. Humidity measurement takes 16 ms (12 bits), temperature measurement is 50 ms (14 bits). Resolution can be set in the `User Register`.
+
+Measurements can be read with or without an 8-bit CRC.
