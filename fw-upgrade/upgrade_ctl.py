@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+from sys import argv
 from time import sleep
 
 from esp_link_controller.esplink import EspLink
@@ -32,3 +35,22 @@ class UpgradeCtl(EspLink):
     def start_dfu(self):
         self.set_boot0(True)
         self.reset_stm()
+
+
+def main():
+    ip_address = argv[1]
+    action = argv[2]
+
+    upgrade_ctl = UpgradeCtl(ip_address)
+    if action in ['reset', 'rst', 'reboot']:
+        upgrade_ctl.reset_stm()
+    elif action in ['application', 'app', 'user']:
+        upgrade_ctl.start_application()
+    elif action == 'dfu':
+        upgrade_ctl.start_dfu()
+    else:
+        raise BaseException('Unsupported action %s' % action)
+
+
+if __name__ == "__main__":
+    main()
