@@ -1,0 +1,3 @@
+[submodule "fw-upgrade/esp_link_controller"]
+	path = fw-upgrade/esp_link_controller
+	url = https://github.com/majorpeter/esp-link-controller.git
