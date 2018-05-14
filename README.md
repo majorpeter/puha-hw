@@ -35,6 +35,7 @@ Create an embedded device that is:
 | NRST         | -         | ESP-01 GPIO0\*         |
 | I2C1 SDA     | PB7       | HTU21D SDA             |
 | I2C1 SCL     | PB6       | HTU21D SCL             |
+| GPIOB12      | PB12      | WS2812B DATA IN        |
 
 \*: The STM32 also controls its `NRST` pin when it's being reset from software (or by using a debugger), so a series resistor is required between the ESP and the STM. The pin is pulled up with 10k on the STM32 board, so a ~2kOhm series resistor is sufficient.
 
