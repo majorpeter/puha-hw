@@ -41,6 +41,8 @@ Create an embedded device that is:
 
 \*: The STM32 also controls its `NRST` pin when it's being reset from software (or by using a debugger), so a series resistor is required between the ESP and the STM. The pin is pulled up with 10k on the STM32 board, so a ~2kOhm series resistor is sufficient.
 
+The serial communication between the ESP-01 and the STM32 uses the baud rate of `460800` in `8N1` format.
+
 ## Features
 
 ### Remote firmware upgrade
