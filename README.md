@@ -36,6 +36,7 @@ Create an embedded device that is:
 | I2C1 SDA     | PB7       | HTU21D SDA             |
 | I2C1 SCL     | PB6       | HTU21D SCL             |
 | GPIOB12      | PB12      | WS2812B DATA IN        |
+| EXTI1        | PB1       | HC-SR501 Out           |
 
 \*: The STM32 also controls its `NRST` pin when it's being reset from software (or by using a debugger), so a series resistor is required between the ESP and the STM. The pin is pulled up with 10k on the STM32 board, so a ~2kOhm series resistor is sufficient.
 
@@ -94,3 +95,5 @@ The HTU21D sensor is attached to the I2C1 peripheral of the MCU. The sensor's 7-
 The sensor can be used in _hold master_ and _no hold master_ modes. The hold master mode means that the SCL line is blocked while measuring (clock stretch). This can be used in this application since there are no other devices on the bus. Humidity measurement takes 16 ms (12 bits), temperature measurement is 50 ms (14 bits). Resolution can be set in the `User Register`.
 
 Measurements can be read with or without an 8-bit CRC.
+
+### Motion Sensor
