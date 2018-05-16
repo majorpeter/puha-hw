@@ -37,6 +37,7 @@ Create an embedded device that is:
 | I2C1 SCL     | PB6       | HTU21D SCL             |
 | GPIOB12      | PB12      | WS2812B DATA IN        |
 | EXTI1        | PB1       | HC-SR501 Out           |
+| ADC12_IN1    | PA1       | KPS Out                |
 
 \*: The STM32 also controls its `NRST` pin when it's being reset from software (or by using a debugger), so a series resistor is required between the ESP and the STM. The pin is pulled up with 10k on the STM32 board, so a ~2kOhm series resistor is sufficient.
 
@@ -86,7 +87,7 @@ The STM32's ADC can be configured in many ways. The input impedance depends on s
 
 Connect C to 3.3 V power supply, connect E to a series resistor that is connected to GND. The voltage measured on E will be a function of R value and illuminance.
 
-The resistor value should be above 165 Ohm (allows 20 mA at 3.3 V) and under 3.3 kOhm (allows 1 mA ~ 1000 lx). `3.3 k << 50 k` (input impedance can be ignored).
+The resistor value should be above 165 Ohm (allows 20 mA at 3.3 V) and under 3.3 kOhm (allows 1 mA ~ 1000 lx). I chose 1 kOhm to simplify calculations. `1 kOhm << 50 kOhm` (input impedance can be ignored).
 
 ### Temperature and Humidity measurement
 
