@@ -77,6 +77,30 @@ Using the [esp-link firmware](https://github.com/jeelabs/esp-link) on the device
 
 GPIO0 and GPIO2 weak pull-up required. CH_PD must be pulled high to operate.
 
+#### Controlling the STM32 bootloader from the ESP-01
+
+To control the NRST and BOOT0 pins, one must send Telnet commands to the device (manually control the RTS and DTR signals). The [telnet_serial_interface](https://github.com/majorpeter/telnet_serial_interface/) project can be used to send those commands. For example (assume the device is available at IP `192.168.0.211`):
+
+* Reset MCU
+```
+./telnet_serial.py 192.168.0.211 dtr 1
+./telnet_serial.py 192.168.0.211 dtr 0
+```
+
+* Switch to Application (boot from main flash)
+```
+./telnet_serial.py 192.168.0.211 rts 0
+./telnet_serial.py 192.168.0.211 dtr 1
+./telnet_serial.py 192.168.0.211 dtr 0
+```
+
+* Switch to DFU (boot from system memory)
+```
+./telnet_serial.py 192.168.0.211 rts 1
+./telnet_serial.py 192.168.0.211 dtr 1
+./telnet_serial.py 192.168.0.211 dtr 0
+```
+
 ### Ambient light sensor feature
 
 According to [wikipedia](https://en.wikipedia.org/wiki/Lux), illuminance in the kitchen should always be under `80 lx`, the living room should be around `300-400 lx`.
